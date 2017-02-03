@@ -1,0 +1,26 @@
+{
+  "name": "node-api",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "~1.0.1",
+    "cookie-parser": "^1.4.3",
+    "crypto": "~0.0.3",
+    "ejs": "^2.5.5",
+    "eslint": "^3.14.1",
+    "express": "~4.0.0",
+    "express-session": "^1.14.2",
+    "mocha": "^3.2.0",
+    "morgan": "~1.7.0",
+    "mysql": "~2.5.0",
+    "oauth2orize": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-http": "^0.3.0",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "sequelize": "~2.0.0",
+    "should": "^11.2.0",
+    "supertest": "^3.0.0",
+    "uuid": "^3.0.1"
+  }
+}

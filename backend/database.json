@@ -1,0 +1,14 @@
+{
+  "dev": {
+    "driver": "postgres",
+    "user": "postgres",
+    "database": "test",
+	  "password": "root"
+  },
+
+  "production": {
+    "driver": "postgres",
+    "user": "postgres",
+    "database": "myapp"
+  }
+}

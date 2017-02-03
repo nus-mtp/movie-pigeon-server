@@ -1,0 +1,23 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - "4"
+python:
+  - "3"
+env:
+  global:
+    - CXX=g++-4.8
+    - NODE_ENV=development
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+before install:
+  - sudo apt-get -y install python3-pip python-dev
+  - python3 -V
+install:
+  - cd backend
+  - npm install
