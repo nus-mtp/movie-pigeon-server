@@ -95,7 +95,7 @@ describe('Bookmark controller test', function () {
       .send('movieId=test000001')
       .expect(200)
       .end(function (err, res) {
-        res.status.should.equal(200);
+        res.status.should.equal(409);
         res.body.status.should.equal('fail');
         res.body.message.should.equal('Bookmark Existed');
         done();
@@ -126,7 +126,7 @@ describe('Bookmark controller test', function () {
         .send('movieId=test000003')
         .expect(200)
         .end(function (err, res) {
-          res.status.should.equal(200);
+          res.status.should.equal(404);
           res.body.status.should.equal('fail');
           res.body.message.should.equal('Bookmark Not Found');
           done();

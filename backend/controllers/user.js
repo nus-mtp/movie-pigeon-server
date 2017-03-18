@@ -9,15 +9,14 @@ exports.postUser = function (req, res) {
   User.getUserByEmail(email)
     .then(function (users) {
       if (users) {
-        res.json({
+        res.status(409).json({
           status: 'fail',
           message: 'User Existed'
         });
       } else {
         User.saveUser(email, username, password)
           .then(function () {
-            flag = true;
-            res.json({
+            res.status(200).json({
               status: 'success',
               message: 'User Created'
             });
@@ -31,7 +30,10 @@ exports.postUser = function (req, res) {
 };
 
 exports.getUser = function (req, res) {
-  res.json({email: req.user.email, username: req.user.username});
+  res.status(200).json({
+    email: req.user.email,
+    username: req.user.username
+  });
 };
 
 exports.updateUsername = function (req, res) {
@@ -40,21 +42,21 @@ exports.updateUsername = function (req, res) {
 
   if (username) {
     if (user.username === username) {
-      res.json({
+      res.status(409).json({
         status: 'fail',
         message: 'Same Username'
       });
     } else {
       User.updateUserUsername(user, username)
         .then(function () {
-          res.json({
+          res.status(200).json({
             status: 'success',
             message: 'Username Updated'
           });
         });
     }
   } else {
-    res.json({
+    res.status(400).json({
       status: 'fail',
       message: 'No Username Provided'
     });
@@ -67,21 +69,21 @@ exports.updatePassword = function (req, res) {
 
   if (password) {
     if (user.password === UserModel.getHashedPassword(password)) {
-      res.json({
+      res.status(409).json({
         status: 'fail',
         message: 'Same Password'
       });
     } else {
       User.updateUserPassword(user, password)
         .then(function () {
-          res.json({
+          res.status(200).json({
             status: 'success',
             message: 'Password Updated'
           });
         });
     }
   } else {
-    res.json({
+    res.status(400).json({
       status: 'fail',
       message: 'No Password Provided'
     });

@@ -101,7 +101,7 @@ describe('Rate controller test', function () {
       .send('score=-1')
       .expect(200)
       .end(function (err, res) {
-        res.status.should.equal(200);
+        res.status.should.equal(400);
         res.body.status.should.equal('fail');
         res.body.message.should.equal('Invalid Score');
       });
@@ -114,7 +114,7 @@ describe('Rate controller test', function () {
       .send('score=10.3')
       .expect(200)
       .end(function (err, res) {
-        res.status.should.equal(200);
+        res.status.should.equal(400);
         res.body.status.should.equal('fail');
         res.body.message.should.equal('Invalid Score');
         done();
@@ -130,7 +130,7 @@ describe('Rate controller test', function () {
       .send('score=abcde')
       .expect(200)
       .end(function (err, res) {
-        res.status.should.equal(200);
+        res.status.should.equal(400);
         res.body.status.should.equal('fail');
         res.body.message.should.equal('Invalid Score');
         done();
@@ -146,7 +146,7 @@ describe('Rate controller test', function () {
       .send('score=1.5')
       .expect(200)
       .end(function (err, res) {
-        res.status.should.equal(200);
+        res.status.should.equal(404);
         res.body.status.should.equal('fail');
         res.body.message.should.equal('Invalid MovieId');
         done();

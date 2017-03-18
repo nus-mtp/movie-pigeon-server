@@ -9,7 +9,10 @@ exports.getMoviesByTitle = function (req, res) {
     .then(function (count) {
       Movie.getMovieByTitle(req.user.id, req.headers.title, req.headers.offset, req.headers.limit)
         .then(function (movies) {
-          res.json({count: count, raw: movies});
+          res.status(200).json({
+            count: count,
+            raw: movies
+          });
         }).catch(function (err) {
           console.log(err);
         }
@@ -20,7 +23,7 @@ exports.getMoviesByTitle = function (req, res) {
 exports.getShowingMovieByTitle = function (req, res) {
   Movie.getShowingMovieByTitle(req.user.id, req.headers.title)
     .then(function (movies) {
-      res.json(movies);
+      res.status(200).json(movies);
     }).catch(function (err) {
       console.log(err);
     }
@@ -57,7 +60,7 @@ exports.getMovieScheduleById = function (req, res) {
     .then(function (schedules) {
       schedules = parseSchedule(schedules);
       schedules = sortSchedule(schedules);
-      res.json(schedules);
+      res.status(200).json(schedules);
     }).catch(function (err) {
       console.log(err);
   })
@@ -67,7 +70,7 @@ exports.getMovieScheduleById = function (req, res) {
 exports.getMoviesById = function (req, res) {
   // Use the Client model to find all clients
   Movie.find({where: {id: req.headers.id}}).then(function (movies) {
-    res.json(movies);
+    res.status(200).json(movies);
   }).catch(function (err) {
     res.send(err);
   });
@@ -78,7 +81,7 @@ exports.getMoviesByProductionYear = function (req, res) {
   // Use the Client model to find all clients
   Movie.find({where: {productionYear: req.headers.productionYear}})
     .then(function (movies) {
-      res.json(movies);
+      res.status(200).json(movies);
     }).catch(function (err) {
     res.send(err);
   });

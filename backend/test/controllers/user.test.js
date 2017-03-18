@@ -56,7 +56,7 @@ describe('User controller test', function () {
       .send('email=testemail')
       .expect(200)
       .end(function (err, res) {
-        res.status.should.equal(200);
+        res.status.should.equal(409);
         res.body.status.should.equal('fail');
         res.body.message.should.equal('User Existed');
         done();
@@ -114,7 +114,7 @@ describe('User controller test', function () {
       .send('username=')
       .expect(200)
       .end(function (err, res) {
-        res.status.should.equal(200);
+        res.status.should.equal(400);
         res.body.status.should.equal('fail');
         res.body.message.should.equal('No Username Provided');
         user.find({
@@ -137,7 +137,7 @@ describe('User controller test', function () {
       .send('username=testusername')
       .expect(200)
       .end(function (err, res) {
-        res.status.should.equal(200);
+        res.status.should.equal(409);
         res.body.status.should.equal('fail');
         res.body.message.should.equal('Same Username');
         done();
@@ -152,7 +152,7 @@ describe('User controller test', function () {
       .send('passworde=')
       .expect(200)
       .end(function (err, res) {
-        res.status.should.equal(200);
+        res.status.should.equal(400);
         res.body.status.should.equal('fail');
         res.body.message.should.equal('No Password Provided');
         user.find({
@@ -175,7 +175,7 @@ describe('User controller test', function () {
       .send('password=pass')
       .expect(200)
       .end(function (err, res) {
-        res.status.should.equal(200);
+        res.status.should.equal(409);
         res.body.status.should.equal('fail');
         res.body.message.should.equal('Same Password');
         done();

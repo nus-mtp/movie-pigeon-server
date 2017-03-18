@@ -9,7 +9,7 @@ exports.postRates = function (req, res) {
   var userId = req.user.id;
 
   if (score < 0 || score > 10) {
-    res.json({status: 'fail', message: 'Invalid Score'});
+    res.status(400).json({status: 'fail', message: 'Invalid Score'});
     return;
   }
 
@@ -21,7 +21,7 @@ exports.postRates = function (req, res) {
             if (ratings) {
               rate.updateRates(ratings, score)
                 .then(function () {
-                  return res.json({
+                  return res.status(200).json({
                     status: 'success',
                     message: 'Ratings Updated'
                   });
@@ -30,7 +30,7 @@ exports.postRates = function (req, res) {
               // Save the rating and check for errors
               rate.postRates(score, movieId, userId)
                 .then(function () {
-                  res.json({
+                  res.status(200).json({
                     status: 'success',
                     message: 'Ratings Posted!'
                   });
@@ -38,7 +38,7 @@ exports.postRates = function (req, res) {
             }
           });
       } else {
-        res.json({
+        res.status(404).json({
           status: 'fail',
           message: 'Invalid MovieId'
         });

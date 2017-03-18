@@ -79,7 +79,7 @@ exports.getTraktRatings = function (req, res) {
   User.getUserByEmail(email)
     .then(function (users) {
       if (users) {
-        res.json({
+        res.status(409).json({
           status: 'fail',
           message: 'User Existed'
         });
@@ -87,7 +87,7 @@ exports.getTraktRatings = function (req, res) {
         User.saveUser(email, username, password)
           .then(function () {
             result = true;
-            res.json({
+            res.status(200).json({
               status: 'success',
               message: 'User Created'
             });
@@ -119,9 +119,9 @@ exports.checkTraktUser = function (req, res) {
       console.log(err);
     } else {
       if (body === null) {
-        res.send(false);
+        res.status(404).send(false);
       } else {
-        res.send(true);
+        res.status(200).send(true);
       }
     }
   });
@@ -171,7 +171,10 @@ exports.checkTmdbUser = function (req, res) {
   var password = req.headers.password;
   getTmdbToken(function (err, body) {
     if (err) {
-      res.json({status: 'fail', message: 'TMDb server unavailable'});
+      res.status(403).json({
+        status: 'fail',
+        message: 'TMDb server unavailable'
+      });
     } else {
       checkTmdbUser(username, password, body.request_token, function (err, result) {
         if (err) {
@@ -256,7 +259,10 @@ exports.getTmdbRatings = function (req, res) {
     if (result === true) {
       getTmdbToken(function (err, body) {
         if (err) {
-          res.json({status: 'fail', message: 'TMDb server unavailable'});
+          res.status(403).json({
+            status: 'fail',
+            message: 'TMDb server unavailable'
+          });
         } else {
           checkTmdbUser(tmdbUsername, tmdbPassword, body.request_token, function (err, result) {
             if (err) {

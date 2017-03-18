@@ -9,7 +9,7 @@ exports.postBookmarks = function (req, res) {
   bookmarks.getSpecificBookmark(userId, movieId)
     .then(function (bookmarkResults) {
       if (bookmarkResults) {
-        res.json({
+        res.status(409).json({
           status: 'fail',
           message: 'Bookmark Existed'
         });
@@ -17,7 +17,7 @@ exports.postBookmarks = function (req, res) {
         // Save the bookmark and check for errors
         bookmarks.postBookmark(movieId, userId)
           .then(function () {
-            res.json({
+            res.status(200).json({
               status: 'success',
               message: 'Bookmark Posted'
             });
@@ -35,7 +35,7 @@ exports.deleteBookmarks = function (req, res) {
       if (bookmarkResult) {
         bookmarkResult.destroy()
           .then(function () {
-            res.json({
+            res.status(200).json({
               status: 'success',
               message: 'Bookmark Deleted'
             });
@@ -44,7 +44,7 @@ exports.deleteBookmarks = function (req, res) {
             console.log(err);
           });
       } else {
-        res.json({
+        res.status(404).json({
           status: 'fail',
           message: 'Bookmark Not Found'
         });
@@ -60,6 +60,6 @@ exports.getBookmarks = function (req, res) {
 
   bookmarks.getAllBookmarks(req.user.id)
     .then(function (movies) {
-      res.json(movies);
+      res.status(200).json(movies);
     });
 };

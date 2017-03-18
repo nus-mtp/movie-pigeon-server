@@ -30,7 +30,10 @@ exports.buildResetRequest = function (req, res) {
           userId: users.id
         })
           .then(function (tokens) {
-            res.json({status: 'success', message: 'Email Sent'});
+            res.status(200).json({
+              status: 'success',
+              message: 'Email Sent'
+            });
 
             setTimeout(function () {
               tokens.destroy();
@@ -42,7 +45,10 @@ exports.buildResetRequest = function (req, res) {
             }
           });
       } else {
-        res.json({status: 'fail', message: 'Email Not Found'});
+        res.status(404).json({
+          status: 'fail',
+          message: 'Email Not Found'
+        });
       }
     });
 
